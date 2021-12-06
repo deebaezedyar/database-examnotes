@@ -397,3 +397,7 @@ group by g.grade_course_code_ref
 	select * from students
 	select * from grades
 	select * from attendance
+
+
+https://github.com/CringeKing93/SolutionsAllInOne
+
