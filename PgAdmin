@@ -1,0 +1,15 @@
+-- get all the contacts from Anchorage, display the columns contact email, firstname and city ordered by contact_firstname
+select contact_email, contact_first_name, contact_city from contacts c where c.contact_city = 'Anchorage' order by c.contact_first_name ;
+-- find all the teachers who haven't taught at all, return the teacher email addresses, in ascending order
+select * from teachers t left join sessions s on s.session_prof_ref = t.teacher_epita_email 
+left join courses c on s.session_course_ref = c.course_code 
+where s.session_course_ref is null ;
+-- compute the absence rate per student and per course, ordered by student epita_email ascending, course name ascending and absence rate descending
+select * from attendance a2 ;
+select * from courses c2 ;
+select s.student_epita_email , c.course_code ,sum(a.attendance_presence)*100/count(c.course_code)::float || '%' as absence_ratio 
+from students s 
+left join attendance a on a.attendance_student_ref = s.student_epita_email 
+left join courses c on c.course_code = a.attendance_course_ref 
+group by c.course_code, s.student_epita_email 
+order by s.student_epita_email asc,c.course_code asc, absence_ratio desc;
